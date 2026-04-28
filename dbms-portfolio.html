@@ -130,6 +130,11 @@ section:nth-child(even){background:var(--bg2);border-top:1px solid var(--border)
 .corner.br{bottom:6px;right:6px;border-width:0 1px 1px 0;}
 .screenshot-caption{font-family:var(--font-mono);font-size:0.68rem;color:var(--text-dim);text-align:center;letter-spacing:0.05em;line-height:1.4;}
 
+/* SCREENSHOT IMAGES */
+.screenshot-img{width:100%;height:auto;max-height:450px;object-fit:contain;border:1px solid var(--sage-dim);border-radius:2px;display:block;background:var(--bg3);cursor:pointer;transition:opacity 0.2s;}
+.screenshot-img:hover{opacity:0.8;}
+.screenshot-img-wrapper{width:100%;overflow:hidden;border:1px solid var(--sage-dim);border-radius:2px;background:var(--bg3);position:relative;display:flex;align-items:center;justify-content:center;min-height:200px;}
+
 /* REFLECTION BLOCK */
 .reflection-block{background:var(--card);border:1px solid var(--border-light);padding:2.5rem;position:relative;max-width:900px;margin-bottom:1.5rem;}
 .reflection-block::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--sage),var(--blue));}
@@ -163,6 +168,19 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
 .fade-up{opacity:0;transform:translateY(24px);transition:opacity 0.65s ease,transform 0.65s ease;}
 .fade-up.visible{opacity:1;transform:translateY(0);}
 
+/* IMAGE MODAL */
+.image-modal{display:none;position:fixed;inset:0;background:rgba(10,13,12,0.95);z-index:1000;align-items:center;justify-content:center;padding:2rem;}
+.image-modal.active{display:flex;}
+.modal-content{position:relative;background:var(--bg3);border:1px solid var(--sage-dim);border-radius:2px;max-width:90vw;max-height:90vh;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.modal-img{width:100%;height:100%;object-fit:contain;cursor:grab;user-select:none;transition:transform 0.1s ease-out;}
+.modal-img:active{cursor:grabbing;}
+.modal-close{position:absolute;top:1rem;right:1rem;background:var(--bg);border:1px solid var(--sage-dim);color:var(--sage);width:40px;height:40px;border-radius:2px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;font-size:1.5rem;line-height:1;z-index:10;}
+.modal-close:hover{background:var(--sage);color:var(--bg);}
+.modal-controls{position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);display:flex;gap:0.75rem;background:rgba(10,13,12,0.9);border:1px solid var(--sage-dim);border-radius:2px;padding:0.75rem;z-index:10;}
+.modal-btn{background:transparent;border:1px solid var(--sage-dim);color:var(--sage);padding:0.5rem 1rem;cursor:pointer;font-family:var(--font-mono);font-size:0.7rem;transition:all 0.2s;border-radius:2px;}
+.modal-btn:hover{background:var(--sage);color:var(--bg);}
+.modal-zoom-display{color:var(--sage);font-family:var(--font-mono);font-size:0.7rem;padding:0.5rem 1rem;display:flex;align-items:center;}
+
 /* RESPONSIVE */
 @media(max-width:900px){
   nav{padding:1rem 2rem;}
@@ -174,6 +192,11 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
 }
 @media(max-width:600px){
   .screenshot-grid{grid-template-columns:1fr;}
+  .image-modal{padding:1rem;}
+  .modal-content{max-width:95vw;max-height:85vh;}
+  .modal-controls{gap:0.5rem;padding:0.5rem;}
+  .modal-btn{padding:0.4rem 0.7rem;font-size:0.65rem;}
+  .modal-zoom-display{padding:0.4rem 0.7rem;font-size:0.65rem;}
 }
 </style>
 </head>
@@ -261,29 +284,23 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
   <div class="divider"></div>
 
   <div class="subsection fade-up">
-    <div class="subsection-label">Screenshots — Design & Schema</div>
+    <div class="subsection-label">Screenshots — Design & Schema <span style="font-family:var(--font-mono);font-size:0.6rem;color:var(--text-muted);margin-left:0.5rem;">(click for full preview)</span></div>
     <div class="screenshot-grid">
       <div class="screenshot-item">
-        <div class="screenshot-placeholder">
-          <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8db5a0" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
-          <span>Insert ER Diagram Screenshot</span>
+        <div class="screenshot-img-wrapper">
+          <img src="images/DBMS EER Diagram.png" alt="ER Diagram" class="screenshot-img" onclick="openImageModal(this)">
         </div>
         <p class="screenshot-caption">ER Diagram</p>
       </div>
       <div class="screenshot-item">
-        <div class="screenshot-placeholder">
-          <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8db5a0" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
-          <span>Insert Relational Schema Screenshot</span>
+        <div class="screenshot-img-wrapper">
+          <img src="images/Flow Schema.png" alt="Relational Schema" class="screenshot-img" onclick="openImageModal(this)">
         </div>
         <p class="screenshot-caption">Relational Schema</p>
       </div>
       <div class="screenshot-item">
-        <div class="screenshot-placeholder">
-          <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8db5a0" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
-          <span>Insert Data Dictionary Screenshot</span>
+        <div class="screenshot-img-wrapper">
+          <img src="images/Flow Data Dictionary.png" alt="Data Dictionary" class="screenshot-img" onclick="openImageModal(this)">
         </div>
         <p class="screenshot-caption">Data Dictionary / Table Structure</p>
       </div>
@@ -571,6 +588,114 @@ const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.07 });
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// ── Image Modal Functions
+let currentZoom = 1;
+let isDragging = false;
+let dragStartX = 0;
+let dragStartY = 0;
+let translateX = 0;
+let translateY = 0;
+
+function openImageModal(img) {
+  const modal = document.getElementById('imageModal');
+  const modalImg = document.getElementById('modalImg');
+  currentZoom = 1;
+  translateX = 0;
+  translateY = 0;
+  modalImg.src = img.src;
+  modalImg.style.transform = `scale(${currentZoom}) translate(${translateX}px, ${translateY}px)`;
+  document.getElementById('zoomLevel').textContent = '100%';
+  modal.classList.add('active');
+}
+
+function closeImageModal() {
+  document.getElementById('imageModal').classList.remove('active');
+}
+
+function zoomIn() {
+  currentZoom += 0.2;
+  applyZoom();
+}
+
+function zoomOut() {
+  if (currentZoom > 0.5) {
+    currentZoom -= 0.2;
+    applyZoom();
+  }
+}
+
+function resetZoom() {
+  currentZoom = 1;
+  translateX = 0;
+  translateY = 0;
+  applyZoom();
+}
+
+function applyZoom() {
+  const modalImg = document.getElementById('modalImg');
+  modalImg.style.transform = `scale(${currentZoom}) translate(${translateX}px, ${translateY}px)`;
+  document.getElementById('zoomLevel').textContent = Math.round(currentZoom * 100) + '%';
+}
+
+const modalImg = document.getElementById('modalImg');
+if (modalImg) {
+  modalImg.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    dragStartX = e.clientX - translateX;
+    dragStartY = e.clientY - translateY;
+  });
+  
+  document.addEventListener('mousemove', (e) => {
+    if (isDragging && currentZoom > 1) {
+      translateX = e.clientX - dragStartX;
+      translateY = e.clientY - dragStartY;
+      applyZoom();
+    }
+  });
+  
+  document.addEventListener('mouseup', () => {
+    isDragging = false;
+  });
+  
+  modalImg.addEventListener('wheel', (e) => {
+    if (document.getElementById('imageModal').classList.contains('active')) {
+      e.preventDefault();
+      if (e.deltaY < 0) {
+        zoomIn();
+      } else {
+        zoomOut();
+      }
+    }
+  });
+}
+
+document.addEventListener('keydown', (e) => {
+  if (document.getElementById('imageModal').classList.contains('active')) {
+    if (e.key === 'Escape') closeImageModal();
+    if (e.key === '+' || e.key === '=') zoomIn();
+    if (e.key === '-') zoomOut();
+  }
+});
+
+document.getElementById('imageModal')?.addEventListener('click', (e) => {
+  if (e.target.id === 'imageModal') closeImageModal();
+});
 </script>
+
+<!-- IMAGE MODAL -->
+<div id="imageModal" class="image-modal">
+  <div class="modal-content">
+    <img id="modalImg" class="modal-img" src="" alt="">
+    <div class="modal-close" onclick="closeImageModal()">✕</div>
+    <div class="modal-controls">
+      <button class="modal-btn" onclick="zoomOut()">−</button>
+      <div class="modal-zoom-display" id="zoomLevel">100%</div>
+      <button class="modal-btn" onclick="zoomIn()">+</button>
+      <button class="modal-btn" onclick="resetZoom()">Reset</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
