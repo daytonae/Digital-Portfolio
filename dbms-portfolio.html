@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DBMS Portfolio — Ngonde Ekoi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0d0c;
+  --bg2: #0f1412;
+  --bg3: #141c19;
+  --sage: #8db5a0;
+  --sage-light: #b4cfbf;
+  --sage-dim: #3d6b56;
+  --blue: #89b4cc;
+  --blue-dim: #3d6e8a;
+  --text: #d4e8dc;
+  --text-dim: #7a9a88;
+  --text-muted: #3d5548;
+  --border: #1a2820;
+  --border-light: #243530;
+  --card: #0f1714;
+  --card-hover: #141f1b;
+  --glow-sage: rgba(141,181,160,0.15);
+  --glow-blue: rgba(137,180,204,0.12);
+  --font-display: 'Syne', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+  --font-body: 'DM Sans', sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-weight:300;line-height:1.75;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");background-size:200px;pointer-events:none;z-index:0;opacity:0.5;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--sage-dim);border-radius:2px;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 4rem;background:rgba(10,13,12,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:var(--font-mono);font-size:0.85rem;color:var(--sage);letter-spacing:0.08em;text-decoration:none;}
+.nav-logo span{color:var(--text-dim);}
+.nav-right{display:flex;align-items:center;gap:1.5rem;}
+.nav-back{font-family:var(--font-mono);font-size:0.72rem;color:var(--text-dim);text-decoration:none;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.25s;display:flex;align-items:center;gap:0.5rem;}
+.nav-back:hover{color:var(--sage);}
+
+/* EDIT MODE TOGGLE */
+.edit-toggle{font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.45rem 1rem;border:1px solid var(--sage-dim);background:transparent;color:var(--sage);cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:0.5rem;}
+.edit-toggle:hover{background:var(--glow-sage);}
+.edit-toggle.active{background:var(--sage);color:var(--bg);border-color:var(--sage);}
+.edit-dot{width:6px;height:6px;border-radius:50%;background:currentColor;animation:blink 1.4s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+
+/* AUTOSAVE TOAST */
+#toast{position:fixed;bottom:2rem;right:2rem;font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;background:var(--bg3);border:1px solid var(--sage-dim);color:var(--sage);padding:0.5rem 1rem;z-index:500;opacity:0;transition:opacity 0.3s;pointer-events:none;display:flex;align-items:center;gap:0.5rem;}
+#toast.show{opacity:1;}
+
+/* EDIT MODE BANNER */
+#edit-banner{display:none;position:fixed;top:66px;left:0;right:0;z-index:99;background:rgba(141,181,160,0.08);border-bottom:1px solid var(--sage-dim);padding:0.45rem 4rem;font-family:var(--font-mono);font-size:0.62rem;color:var(--sage);letter-spacing:0.12em;text-transform:uppercase;text-align:center;}
+#edit-banner.show{display:block;}
+
+/* HERO */
+.dbms-hero{min-height:60vh;display:flex;flex-direction:column;justify-content:flex-end;padding:10rem 4rem 5rem;position:relative;border-bottom:1px solid var(--border);}
+.hero-bg-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;opacity:0.4;mask-image:radial-gradient(ellipse 100% 80% at 20% 80%,black 20%,transparent 75%);}
+.hero-glow{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,var(--glow-blue) 0%,transparent 70%);top:30%;left:0;pointer-events:none;}
+.hero-tag{font-family:var(--font-mono);font-size:0.72rem;color:var(--blue);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem;position:relative;z-index:1;}
+.hero-tag::before{content:'';width:30px;height:1px;background:var(--blue);}
+.dbms-hero h1{font-family:var(--font-display);font-size:clamp(2.5rem,5vw,4.5rem);font-weight:800;line-height:1.05;letter-spacing:-0.02em;position:relative;z-index:1;}
+.dbms-hero h1 span{background:linear-gradient(135deg,var(--sage-light) 0%,var(--blue) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;}
+.dbms-hero-meta{font-family:var(--font-mono);font-size:0.75rem;color:var(--text-dim);letter-spacing:0.1em;margin-top:1.5rem;display:flex;gap:2rem;flex-wrap:wrap;position:relative;z-index:1;}
+.dbms-hero-meta span{display:flex;align-items:center;gap:0.5rem;}
+.dbms-hero-meta span::before{content:'//';color:var(--text-muted);}
+
+/* SECTIONS */
+section{padding:6rem 4rem;position:relative;z-index:1;}
+section:nth-child(even){background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.section-header{display:flex;align-items:center;gap:1.5rem;margin-bottom:3.5rem;}
+.section-tag{font-family:var(--font-mono);font-size:0.65rem;color:var(--sage);letter-spacing:0.2em;text-transform:uppercase;opacity:0.7;}
+.section-title{font-family:var(--font-display);font-size:clamp(1.75rem,3vw,2.5rem);font-weight:800;letter-spacing:-0.02em;color:var(--text);}
+.section-line{flex:1;height:1px;background:linear-gradient(90deg,var(--border-light),transparent);}
+
+/* SUBSECTIONS */
+.subsection{margin-bottom:3.5rem;}
+.subsection:last-child{margin-bottom:0;}
+.subsection-label{font-family:var(--font-mono);font-size:0.68rem;color:var(--blue);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:1.25rem;display:flex;align-items:center;gap:0.6rem;}
+.subsection-label::before{content:'›';color:var(--sage);}
+.subsection h3{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--sage-light);margin-bottom:0.75rem;}
+
+/* EDITABLE AREAS */
+.editable{font-size:0.92rem;color:var(--text-dim);line-height:1.85;max-width:760px;min-height:3em;padding:1rem 1.25rem;background:var(--bg3);border:1px dashed var(--border-light);border-radius:2px;outline:none;cursor:text;transition:border-color 0.2s,background 0.2s;white-space:pre-wrap;word-break:break-word;}
+.editable:focus{border-color:var(--sage-dim);border-style:solid;background:rgba(141,181,160,0.04);}
+.editable.edit-mode-on{border-color:var(--sage-dim);border-style:dashed;}
+.editable.edit-mode-on:hover{border-color:var(--sage);background:rgba(141,181,160,0.04);}
+.editable[data-placeholder]:empty::before{content:attr(data-placeholder);color:var(--text-muted);font-family:var(--font-mono);font-size:0.75rem;letter-spacing:0.05em;pointer-events:none;}
+
+/* CONTENT CARDS */
+.content-card{background:var(--card);border:1px solid var(--border-light);padding:2rem;position:relative;margin-bottom:1.5rem;max-width:760px;}
+.content-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,var(--sage),var(--blue));}
+.content-card h4{font-family:var(--font-display);font-size:0.95rem;font-weight:700;color:var(--sage-light);margin-bottom:0.75rem;}
+.content-card .editable{background:transparent;border-color:transparent;padding:0;}
+.content-card .editable:focus{background:rgba(141,181,160,0.04);padding:0.5rem 0.75rem;border-color:var(--sage-dim);border-style:solid;}
+.content-card .editable.edit-mode-on{border-color:var(--border-light);border-style:dashed;padding:0.5rem 0.75rem;}
+.content-card .editable.edit-mode-on:hover{border-color:var(--sage-dim);}
+
+/* ARTIFACT GRID */
+.artifact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem;}
+.artifact-card{background:var(--card);border:1px solid var(--border-light);padding:1.75rem;position:relative;transition:border-color 0.3s,background 0.3s;overflow:hidden;}
+.artifact-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--sage),var(--blue));transform:scaleX(0);transform-origin:left;transition:transform 0.4s;}
+.artifact-card:hover::after{transform:scaleX(1);}
+.artifact-card:hover{border-color:var(--sage-dim);}
+.artifact-card-label{font-family:var(--font-mono);font-size:0.62rem;color:var(--blue);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.75rem;}
+.artifact-card h4{font-family:var(--font-display);font-size:1rem;font-weight:700;color:var(--text);margin-bottom:0.75rem;}
+.artifact-card .editable{background:transparent;border-color:transparent;border-top:1px dashed var(--border-light);border-radius:0;padding:0.75rem 0 0;}
+.artifact-card .editable:focus{background:rgba(141,181,160,0.04);padding:0.75rem;border:1px solid var(--sage-dim);}
+.artifact-card .editable.edit-mode-on{border-top:1px dashed var(--sage-dim);padding:0.75rem 0 0;}
+.artifact-card .editable.edit-mode-on:hover{background:rgba(141,181,160,0.04);}
+
+/* SCREENSHOT PLACEHOLDER */
+.screenshot-wrap{margin:1.5rem 0;}
+.screenshot-placeholder{width:100%;max-width:760px;height:280px;background:var(--bg3);border:1px dashed var(--sage-dim);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.75rem;position:relative;}
+.screenshot-placeholder.sm{height:200px;}
+.screenshot-placeholder.lg{height:380px;}
+.screenshot-placeholder svg{opacity:0.25;}
+.screenshot-placeholder span{font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);letter-spacing:0.15em;text-transform:uppercase;}
+.screenshot-placeholder .corner{position:absolute;width:12px;height:12px;border-color:var(--sage-dim);border-style:solid;}
+.corner.tl{top:8px;left:8px;border-width:1px 0 0 1px;}
+.corner.tr{top:8px;right:8px;border-width:1px 1px 0 0;}
+.corner.bl{bottom:8px;left:8px;border-width:0 0 1px 1px;}
+.corner.br{bottom:8px;right:8px;border-width:0 1px 1px 0;}
+.screenshot-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;max-width:760px;}
+.screenshot-grid .screenshot-placeholder{max-width:100%;}
+
+/* REFLECTION BLOCK */
+.reflection-block{background:var(--card);border:1px solid var(--border-light);padding:2.5rem;position:relative;max-width:900px;margin-bottom:1.5rem;}
+.reflection-block::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--sage),var(--blue));}
+.reflection-block h3{font-family:var(--font-display);font-size:1rem;font-weight:700;color:var(--sage-light);margin-bottom:1rem;}
+.reflection-block .editable{max-width:100%;background:transparent;border-color:transparent;padding:0;}
+.reflection-block .editable:focus{background:rgba(141,181,160,0.04);padding:0.75rem;border:1px solid var(--sage-dim);}
+.reflection-block .editable.edit-mode-on{border-color:var(--border-light);border-style:dashed;padding:0.75rem;}
+.reflection-block .editable.edit-mode-on:hover{border-color:var(--sage-dim);}
+.reflection-block .editable + .editable{margin-top:0.75rem;}
+
+/* SYNTHESIS BLOCK */
+.synthesis-block{background:var(--bg3);border:1px solid var(--border-light);padding:3rem;position:relative;max-width:900px;}
+.synthesis-block::before{content:'"';position:absolute;top:1.5rem;left:2rem;font-family:var(--font-display);font-size:5rem;color:var(--sage-dim);line-height:1;opacity:0.3;pointer-events:none;}
+.synthesis-block .editable{max-width:100%;background:transparent;border-color:transparent;padding:0;}
+.synthesis-block .editable:focus{background:rgba(141,181,160,0.04);padding:0.75rem;border:1px solid var(--sage-dim);}
+.synthesis-block .editable.edit-mode-on{border-color:var(--border-light);border-style:dashed;padding:0.75rem;}
+.synthesis-block .editable.edit-mode-on:hover{border-color:var(--sage-dim);}
+.synthesis-block .editable + .editable{margin-top:1rem;}
+
+/* DIVIDER */
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border-light),transparent);margin:2.5rem 0;}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;}
+.footer-copy{font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);letter-spacing:0.08em;}
+.footer-copy span{color:var(--sage-dim);}
+.back-btn{font-family:var(--font-mono);font-size:0.68rem;color:var(--text-dim);text-decoration:none;letter-spacing:0.1em;text-transform:uppercase;display:inline-flex;align-items:center;gap:0.5rem;transition:color 0.25s;}
+.back-btn:hover{color:var(--sage);}
+
+/* ANIMATIONS */
+.fade-up{opacity:0;transform:translateY(24px);transition:opacity 0.65s ease,transform 0.65s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:1rem 2rem;}
+  #edit-banner{padding:0.45rem 2rem;}
+  .dbms-hero{padding:8rem 2rem 4rem;}
+  section{padding:4rem 2rem;}
+  .screenshot-grid{grid-template-columns:1fr;}
+  footer{padding:1.5rem 2rem;flex-direction:column;gap:0.5rem;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- EDIT BANNER -->
+<div id="edit-banner">// Edit mode active — click any section to type · changes save automatically</div>
+
+<!-- TOAST -->
+<div id="toast">
+  <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+  Saved
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">nekoi<span>.dev</span></a>
+  <div class="nav-right">
+    <button class="edit-toggle" id="editToggle" onclick="toggleEdit()">
+      <span class="edit-dot" style="display:none;" id="editDot"></span>
+      Edit
+    </button>
+    <a class="nav-back" href="index.html">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      Back
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="dbms-hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-tag">Database Management Systems</div>
+  <h1>DBMS<br><span>Learning Portfolio</span></h1>
+  <div class="dbms-hero-meta">
+    <span>Hampton University</span>
+    <span>Spring 2026</span>
+    <span>MySQL · MongoDB · Redis · Python</span>
+  </div>
+</div>
+
+<!-- ======= TECHNICAL ARTIFACTS ======= -->
+<section id="artifacts">
+  <div class="section-header fade-up">
+    <span class="section-tag">01</span>
+    <h2 class="section-title">Technical Artifacts</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="artifact-grid">
+
+    <div class="artifact-card fade-up">
+      <div class="artifact-card-label">Database Design & Modeling</div>
+      <h4>ER Diagrams & Relational Schema</h4>
+      <div class="editable" data-key="artifact-design" data-placeholder="Click to write about your ER diagrams, schema design, normalization, and key/constraint decisions..."></div>
+    </div>
+
+    <div class="artifact-card fade-up">
+      <div class="artifact-card-label">SQL Implementation</div>
+      <h4>DDL, Queries & Index Analysis</h4>
+      <div class="editable" data-key="artifact-sql" data-placeholder="Click to write about your CREATE TABLE statements, JOINs, subqueries, GROUP BY/HAVING, and EXPLAIN output..."></div>
+    </div>
+
+    <div class="artifact-card fade-up">
+      <div class="artifact-card-label">Advanced Database Concepts</div>
+      <h4>Transactions, Concurrency & Optimization</h4>
+      <div class="editable" data-key="artifact-advanced" data-placeholder="Click to write about transaction handling, ACID compliance, index strategy, and query optimization..."></div>
+    </div>
+
+    <div class="artifact-card fade-up">
+      <div class="artifact-card-label">NoSQL Concepts</div>
+      <h4>MongoDB Document Modeling</h4>
+      <div class="editable" data-key="artifact-nosql" data-placeholder="Click to write about document schemas, embedding vs. referencing trade-offs, and composite indexing strategy..."></div>
+    </div>
+
+    <div class="artifact-card fade-up">
+      <div class="artifact-card-label">Labs & Exercises</div>
+      <h4>Redis, In-Memory & Hands-On Labs</h4>
+      <div class="editable" data-key="artifact-labs" data-placeholder="Click to write about your lab work, Redis commands, and exercise outcomes..."></div>
+    </div>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="subsection fade-up">
+    <div class="subsection-label">Screenshots — Design & Schema</div>
+    <div class="screenshot-grid">
+      <div class="screenshot-placeholder">
+        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8db5a0" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+        <span>Insert ER Diagram Screenshot</span>
+      </div>
+      <div class="screenshot-placeholder">
+        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8db5a0" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+        <span>Insert Relational Schema Screenshot</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection fade-up">
+    <div class="subsection-label">Screenshots — SQL & NoSQL</div>
+    <div class="screenshot-grid">
+      <div class="screenshot-placeholder sm">
+        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#89b4cc" stroke-width="1.2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        <span>Insert SQL Query Output</span>
+      </div>
+      <div class="screenshot-placeholder sm">
+        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#89b4cc" stroke-width="1.2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        <span>Insert MongoDB Document Output</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ======= PROJECT EVIDENCE — FLOW ======= -->
+<section id="flow">
+  <div class="section-header fade-up">
+    <span class="section-tag">02</span>
+    <h2 class="section-title">Project Evidence — FLOW</h2>
+    <div class="section-line"></div>
+  </div>
+  <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.1em;margin-bottom:3rem;position:relative;z-index:1;">Soul by the Sea Restaurant Database System</div>
+
+  <!-- System Overview -->
+  <div class="subsection fade-up">
+    <div class="subsection-label">System Overview</div>
+    <h3>What FLOW Is</h3>
+    <div class="editable" data-key="flow-overview" data-placeholder="Describe the FLOW system — its purpose, scope, entities involved, and overall architecture overview..."></div>
+    <div class="screenshot-wrap">
+      <div class="screenshot-placeholder lg">
+        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#8db5a0" stroke-width="1.2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+        <span>Insert System Architecture / Overview Diagram</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Database Design Decisions -->
+  <div class="subsection fade-up">
+    <div class="subsection-label">Database Design Decisions</div>
+    <h3>Schema, Keys & Normalization</h3>
+    <div class="content-card">
+      <h4>Storage Engine & Character Set</h4>
+      <div class="editable" data-key="flow-storage" data-placeholder="Write about your InnoDB selection rationale, UTF-8 charset decision, and partitioning strategy..."></div>
+    </div>
+    <div class="content-card">
+      <h4>Normalization to 3NF</h4>
+      <div class="editable" data-key="flow-normalization" data-placeholder="Write about your normalization steps, dependency analysis, and final table structure decisions..."></div>
+    </div>
+    <div class="content-card">
+      <h4>Key Constraints & ENUMs</h4>
+      <div class="editable" data-key="flow-constraints" data-placeholder="Write about your foreign key relationships, ENUM field decisions, and constraint justifications..."></div>
+    </div>
+    <div class="screenshot-grid fade-up">
+      <div class="screenshot-placeholder">
+        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8db5a0" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+        <span>Insert Schema Screenshot</span>
+      </div>
+      <div class="screenshot-placeholder">
+        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8db5a0" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+        <span>Insert DDL / CREATE TABLE Screenshot</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SQL + NoSQL Integration -->
+  <div class="subsection fade-up">
+    <div class="subsection-label">SQL + NoSQL Integration</div>
+    <h3>Hybrid Architecture</h3>
+    <div class="editable" data-key="flow-hybrid-intro" data-placeholder="Describe how MySQL and MongoDB were used together — what data lives in each, how they interact, and the reasoning behind the split..."></div>
+    <div class="content-card" style="margin-top:1.5rem;">
+      <h4>MySQL — Transactional Data</h4>
+      <div class="editable" data-key="flow-mysql" data-placeholder="Write about what relational data was stored in MySQL and why (ACID, structured queries, CP consistency)..."></div>
+    </div>
+    <div class="content-card">
+      <h4>MongoDB — Flexible Content & Analytics</h4>
+      <div class="editable" data-key="flow-mongo" data-placeholder="Write about the MongoDB document model, embedded OrderItems, and eventual consistency trade-off..."></div>
+    </div>
+    <div class="screenshot-wrap fade-up">
+      <div class="screenshot-placeholder">
+        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#89b4cc" stroke-width="1.2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        <span>Insert Integration / Hybrid Architecture Diagram</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Testing & Validation -->
+  <div class="subsection fade-up">
+    <div class="subsection-label">Testing & Validation</div>
+    <h3>Query Testing & Data Integrity</h3>
+    <div class="editable" data-key="flow-testing" data-placeholder="Describe how queries were tested, how data integrity was verified, and what validation methods were used..."></div>
+    <div class="screenshot-grid fade-up" style="margin-top:1.5rem;">
+      <div class="screenshot-placeholder sm">
+        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#89b4cc" stroke-width="1.2"><polyline points="20 6 9 17 4 12"/></svg>
+        <span>Insert Test Query Output</span>
+      </div>
+      <div class="screenshot-placeholder sm">
+        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#89b4cc" stroke-width="1.2"><polyline points="20 6 9 17 4 12"/></svg>
+        <span>Insert EXPLAIN / Validation Output</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Challenges & Trade-Offs -->
+  <div class="subsection fade-up">
+    <div class="subsection-label">Challenges & Trade-Offs</div>
+    <h3>What Was Hard & What I'd Do Differently</h3>
+    <div class="content-card">
+      <h4>Team & Workflow Challenges</h4>
+      <div class="editable" data-key="flow-team" data-placeholder="Describe collaboration challenges, unequal contributions, and how you maintained quality and on-time delivery..."></div>
+    </div>
+    <div class="content-card">
+      <h4>Cross-Platform Environment Setup</h4>
+      <div class="editable" data-key="flow-env" data-placeholder="Describe the environment variable-based credential setup and cross-platform Mac/Windows development challenges..."></div>
+    </div>
+    <div class="content-card">
+      <h4>Architecture Trade-Offs</h4>
+      <div class="editable" data-key="flow-tradeoffs" data-placeholder="Describe Tkinter vs SwiftUI vs Flask decisions, scope changes, and trade-offs made under real constraints..."></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ======= REFLECTIVE COMMENTARY ======= -->
+<section id="reflection">
+  <div class="section-header fade-up">
+    <span class="section-tag">03</span>
+    <h2 class="section-title">Reflective Commentary</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="reflection-block fade-up">
+    <h3>Learning Growth</h3>
+    <div class="editable" data-key="reflect-growth-1" data-placeholder="Reflect on how your understanding of database systems evolved over the semester — what clicked, what surprised you, and what you understand now that you didn't before..."></div>
+    <div class="editable" data-key="reflect-growth-2" data-placeholder="Continue here — specific moments, assignments, or concepts that shifted your thinking..."></div>
+  </div>
+
+  <div class="reflection-block fade-up">
+    <h3>SQL vs. NoSQL vs. NewSQL/Graph</h3>
+    <div class="editable" data-key="reflect-compare-1" data-placeholder="Compare the three paradigms — when each fits, what CAP theorem reasoning applies, and how you would now choose between them for a real project..."></div>
+    <div class="editable" data-key="reflect-compare-2" data-placeholder="Reference specific decisions from FLOW and how they exemplify these trade-offs..."></div>
+  </div>
+
+  <div class="reflection-block fade-up">
+    <h3>Design Trade-Offs</h3>
+    <div class="editable" data-key="reflect-design" data-placeholder="Reflect on the architectural decisions you made — normalization choices, embedding vs. referencing in MongoDB, indexing strategy, and what you'd change in hindsight..."></div>
+  </div>
+
+  <div class="reflection-block fade-up">
+    <h3>Real-World Applications</h3>
+    <div class="editable" data-key="reflect-realworld-1" data-placeholder="Connect course concepts to your Protiviti Oracle ERP internship — what overlaps, what was different, and how DBMS concepts apply to enterprise systems..."></div>
+    <div class="editable" data-key="reflect-realworld-2" data-placeholder="Connect to your cybersecurity career path — how database knowledge informs security, audit trails, and data integrity in secure systems..."></div>
+  </div>
+
+</section>
+
+<!-- ======= SYNTHESIS REFLECTION ======= -->
+<section id="synthesis">
+  <div class="section-header fade-up">
+    <span class="section-tag">04</span>
+    <h2 class="section-title">Synthesis Reflection</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="synthesis-block fade-up">
+    <div class="editable" data-key="synthesis-1" data-placeholder="Begin synthesis here — tie together everything from the semester into one cohesive narrative. What is the through-line of your learning?"></div>
+    <div class="editable" data-key="synthesis-2" data-placeholder="Continue — how did this course change the way you approach system design? What decisions feel automatic now that felt abstract before?"></div>
+    <div class="editable" data-key="synthesis-3" data-placeholder="Continue — speak to broader implications. What does it mean to design systems that are not just functional but principled?"></div>
+    <div class="editable" data-key="synthesis-4" data-placeholder="Final section — what comes next? How will you apply this knowledge going forward?"></div>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-copy">© 2026 <span>Ngonde Ekoi</span> · Database Management Systems Portfolio</div>
+  <a href="index.html" class="back-btn">
+    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    Back to Portfolio
+  </a>
+</footer>
+
+<script>
+// ── Storage key prefix
+const PREFIX = 'dbms-portfolio-';
+
+// ── Load saved content on page load
+document.querySelectorAll('.editable[data-key]').forEach(el => {
+  const saved = localStorage.getItem(PREFIX + el.dataset.key);
+  if (saved !== null) el.innerHTML = saved;
+});
+
+// ── Auto-save on input
+let saveTimer;
+function scheduleAutosave(el) {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => {
+    localStorage.setItem(PREFIX + el.dataset.key, el.innerHTML);
+    showToast();
+  }, 600);
+}
+
+function showToast() {
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  clearTimeout(t._hide);
+  t._hide = setTimeout(() => t.classList.remove('show'), 1800);
+}
+
+document.querySelectorAll('.editable[data-key]').forEach(el => {
+  el.addEventListener('input', () => scheduleAutosave(el));
+});
+
+// ── Edit mode toggle
+let editMode = false;
+function toggleEdit() {
+  editMode = !editMode;
+  const btn = document.getElementById('editToggle');
+  const dot = document.getElementById('editDot');
+  const banner = document.getElementById('edit-banner');
+  const editables = document.querySelectorAll('.editable');
+
+  if (editMode) {
+    btn.classList.add('active');
+    btn.innerHTML = '<span class="edit-dot" id="editDot"></span> Editing';
+    dot.style.display = 'inline-block';
+    banner.classList.add('show');
+    editables.forEach(el => {
+      el.contentEditable = 'true';
+      el.classList.add('edit-mode-on');
+    });
+  } else {
+    btn.classList.remove('active');
+    btn.innerHTML = '<span class="edit-dot" id="editDot" style="display:none"></span> Edit';
+    banner.classList.remove('show');
+    editables.forEach(el => {
+      el.contentEditable = 'false';
+      el.classList.remove('edit-mode-on');
+      // save on exit
+      localStorage.setItem(PREFIX + el.dataset.key, el.innerHTML);
+    });
+    showToast();
+  }
+}
+
+// ── Fade-in on scroll
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.07 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
