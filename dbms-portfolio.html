@@ -116,18 +116,19 @@ section:nth-child(even){background:var(--bg2);border-top:1px solid var(--border)
 
 /* SCREENSHOT PLACEHOLDER */
 .screenshot-wrap{margin:1.5rem 0;}
-.screenshot-placeholder{width:100%;max-width:760px;height:280px;background:var(--bg3);border:1px dashed var(--sage-dim);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.75rem;position:relative;}
+.screenshot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:100%;margin:1.5rem 0;}
+.screenshot-item{display:flex;flex-direction:column;gap:0.75rem;}
+.screenshot-placeholder{width:100%;height:220px;background:var(--bg3);border:1px dashed var(--sage-dim);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.75rem;position:relative;border-radius:2px;}
 .screenshot-placeholder.sm{height:200px;}
 .screenshot-placeholder.lg{height:380px;}
 .screenshot-placeholder svg{opacity:0.25;}
-.screenshot-placeholder span{font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);letter-spacing:0.15em;text-transform:uppercase;}
+.screenshot-placeholder span{font-family:var(--font-mono);font-size:0.62rem;color:var(--text-muted);letter-spacing:0.12em;text-transform:uppercase;text-align:center;padding:0 0.5rem;}
 .screenshot-placeholder .corner{position:absolute;width:12px;height:12px;border-color:var(--sage-dim);border-style:solid;}
-.corner.tl{top:8px;left:8px;border-width:1px 0 0 1px;}
-.corner.tr{top:8px;right:8px;border-width:1px 1px 0 0;}
-.corner.bl{bottom:8px;left:8px;border-width:0 0 1px 1px;}
-.corner.br{bottom:8px;right:8px;border-width:0 1px 1px 0;}
-.screenshot-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;max-width:760px;}
-.screenshot-grid .screenshot-placeholder{max-width:100%;}
+.corner.tl{top:6px;left:6px;border-width:1px 0 0 1px;}
+.corner.tr{top:6px;right:6px;border-width:1px 1px 0 0;}
+.corner.bl{bottom:6px;left:6px;border-width:0 0 1px 1px;}
+.corner.br{bottom:6px;right:6px;border-width:0 1px 1px 0;}
+.screenshot-caption{font-family:var(--font-mono);font-size:0.68rem;color:var(--text-dim);text-align:center;letter-spacing:0.05em;line-height:1.4;}
 
 /* REFLECTION BLOCK */
 .reflection-block{background:var(--card);border:1px solid var(--border-light);padding:2.5rem;position:relative;max-width:900px;margin-bottom:1.5rem;}
@@ -168,8 +169,11 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
   #edit-banner{padding:0.45rem 2rem;}
   .dbms-hero{padding:8rem 2rem 4rem;}
   section{padding:4rem 2rem;}
-  .screenshot-grid{grid-template-columns:1fr;}
+  .screenshot-grid{grid-template-columns:repeat(2,1fr);}
   footer{padding:1.5rem 2rem;flex-direction:column;gap:0.5rem;text-align:center;}
+}
+@media(max-width:600px){
+  .screenshot-grid{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -259,15 +263,29 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
   <div class="subsection fade-up">
     <div class="subsection-label">Screenshots — Design & Schema</div>
     <div class="screenshot-grid">
-      <div class="screenshot-placeholder">
-        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8db5a0" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
-        <span>Insert ER Diagram Screenshot</span>
+      <div class="screenshot-item">
+        <div class="screenshot-placeholder">
+          <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8db5a0" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+          <span>Insert ER Diagram Screenshot</span>
+        </div>
+        <p class="screenshot-caption">ER Diagram</p>
       </div>
-      <div class="screenshot-placeholder">
-        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8db5a0" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
-        <span>Insert Relational Schema Screenshot</span>
+      <div class="screenshot-item">
+        <div class="screenshot-placeholder">
+          <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8db5a0" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+          <span>Insert Relational Schema Screenshot</span>
+        </div>
+        <p class="screenshot-caption">Relational Schema</p>
+      </div>
+      <div class="screenshot-item">
+        <div class="screenshot-placeholder">
+          <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8db5a0" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+          <span>Insert Data Dictionary Screenshot</span>
+        </div>
+        <p class="screenshot-caption">Data Dictionary / Table Structure</p>
       </div>
     </div>
   </div>
@@ -275,15 +293,29 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
   <div class="subsection fade-up">
     <div class="subsection-label">Screenshots — SQL & NoSQL</div>
     <div class="screenshot-grid">
-      <div class="screenshot-placeholder sm">
-        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#89b4cc" stroke-width="1.2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-        <span>Insert SQL Query Output</span>
+      <div class="screenshot-item">
+        <div class="screenshot-placeholder sm">
+          <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#89b4cc" stroke-width="1.2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          <span>Insert SQL Query Output</span>
+        </div>
+        <p class="screenshot-caption">SQL Query Output (JOIN / Filtering)</p>
       </div>
-      <div class="screenshot-placeholder sm">
-        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#89b4cc" stroke-width="1.2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-        <span>Insert MongoDB Document Output</span>
+      <div class="screenshot-item">
+        <div class="screenshot-placeholder sm">
+          <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#89b4cc" stroke-width="1.2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          <span>Insert MongoDB Document Output</span>
+        </div>
+        <p class="screenshot-caption">MongoDB Document Output (Reviews Example)</p>
+      </div>
+      <div class="screenshot-item">
+        <div class="screenshot-placeholder sm">
+          <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#89b4cc" stroke-width="1.2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          <span>Insert Redis Key-Value Output</span>
+        </div>
+        <p class="screenshot-caption">Redis Key-Value Output (Caching Example)</p>
       </div>
     </div>
   </div>
