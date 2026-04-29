@@ -116,7 +116,7 @@ section:nth-child(even){background:var(--bg2);border-top:1px solid var(--border)
 
 /* SCREENSHOT PLACEHOLDER */
 .screenshot-wrap{margin:1.5rem 0;}
-.screenshot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:100%;margin:1.5rem 0;}
+.screenshot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.5rem;max-width:100%;margin:1.5rem 0;}
 .screenshot-item{display:flex;flex-direction:column;gap:0.75rem;}
 .screenshot-placeholder{width:100%;height:220px;background:var(--bg3);border:1px dashed var(--sage-dim);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.75rem;position:relative;border-radius:2px;}
 .screenshot-placeholder.sm{height:200px;}
@@ -349,9 +349,9 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
     <div class="editable" data-key="flow-overview" data-placeholder="Describe the FLOW system — its purpose, scope, entities involved, and overall architecture overview..."></div>
     <div class="screenshot-wrap">
       <div class="screenshot-img-wrapper">
-        <img src="images/System arch.png" alt="System Architecture Diagram" class="screenshot-img" onclick="openImageModal(this)" style="height: 190px; width: auto;">
+        <img src="images/Flow Logo.png" alt="FLOW Logo" class="screenshot-img" onclick="openImageModal(this)" style="height: 190px; width: auto;">
       </div>
-      <p class="screenshot-caption">System Architecture Diagram</p>
+      <p class="screenshot-caption">FLOW Logo</p>
     </div>
   </div>
 
@@ -426,11 +426,10 @@ CREATE TABLE person (
     <h3>Hybrid Architecture</h3>
     <div class="editable" data-key="flow-hybrid-intro" data-placeholder="Explain flow: UI → Flask/Python → databases, mention Redis caching, describe SQL for transactions and MongoDB for flexible/event data..."></div>
     <div class="screenshot-wrap fade-up">
-      <div class="screenshot-placeholder">
-        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#89b4cc" stroke-width="1.2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-        <span>Insert System Architecture Diagram</span>
+      <div class="screenshot-img-wrapper">
+        <img src="images/System arch.png" alt="System Architecture Diagram" class="screenshot-img" onclick="openImageModal(this)">
       </div>
+      <p class="screenshot-caption">System Architecture Diagram</p>
     </div>
     <div class="screenshot-wrap fade-up">
       <div class="screenshot-placeholder">
@@ -446,13 +445,6 @@ Scalability & Performance Considerations -->
     <div class="subsection-label">Scalability & Performance Considerations</div>
     <h3>Redis Caching & Optimization</h3>
     <div class="editable" data-key="flow-testing" data-placeholder="Describe Redis caching, indexing and query efficiency, future scalability (sharding, replicas)..."></div>
-    <div class="screenshot-wrap fade-up">
-      <div class="screenshot-placeholder">
-        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#89b4cc" stroke-width="1.2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-        <span>Insert Performance Optimization Screenshot (Redis or Indexing)</span>
-      </div>
-    </div>
   </div>
 
   <div class="divider"></div>
