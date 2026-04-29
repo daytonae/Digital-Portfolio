@@ -86,14 +86,14 @@ section:nth-child(even){background:var(--bg2);border-top:1px solid var(--border)
 .subsection h3{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--sage-light);margin-bottom:0.75rem;}
 
 /* EDITABLE AREAS */
-.editable{font-size:0.92rem;color:var(--text-dim);line-height:1.85;max-width:760px;min-height:3em;padding:1rem 1.25rem;background:var(--bg3);border:1px dashed var(--border-light);border-radius:2px;outline:none;cursor:text;transition:border-color 0.2s,background 0.2s;white-space:pre-wrap;word-break:break-word;}
+.editable{font-size:0.92rem;color:var(--text-dim);line-height:1.85;max-width:100%;min-height:3em;padding:1rem 1.25rem;background:var(--bg3);border:1px dashed var(--border-light);border-radius:2px;outline:none;cursor:text;transition:border-color 0.2s,background 0.2s;white-space:pre-wrap;word-break:break-word;}
 .editable:focus{border-color:var(--sage-dim);border-style:solid;background:rgba(141,181,160,0.04);}
 .editable.edit-mode-on{border-color:var(--sage-dim);border-style:dashed;}
 .editable.edit-mode-on:hover{border-color:var(--sage);background:rgba(141,181,160,0.04);}
 .editable[data-placeholder]:empty::before{content:attr(data-placeholder);color:var(--text-muted);font-family:var(--font-mono);font-size:0.75rem;letter-spacing:0.05em;pointer-events:none;}
 
 /* CONTENT CARDS */
-.content-card{background:var(--card);border:1px solid var(--border-light);padding:2rem;position:relative;margin-bottom:1.5rem;max-width:760px;}
+.content-card{background:var(--card);border:1px solid var(--border-light);padding:2rem;position:relative;margin-bottom:1.5rem;max-width:100%;}
 .content-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,var(--sage),var(--blue));}
 .content-card h4{font-family:var(--font-display);font-size:0.95rem;font-weight:700;color:var(--sage-light);margin-bottom:0.75rem;}
 .content-card .editable{background:transparent;border-color:transparent;padding:0;}
@@ -116,7 +116,7 @@ section:nth-child(even){background:var(--bg2);border-top:1px solid var(--border)
 
 /* SCREENSHOT PLACEHOLDER */
 .screenshot-wrap{margin:1.5rem 0;}
-.screenshot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.5rem;max-width:100%;margin:1.5rem 0;}
+.screenshot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(450px,1fr));gap:1.5rem;max-width:100%;margin:1.5rem 0;}
 .screenshot-item{display:flex;flex-direction:column;gap:0.75rem;}
 .screenshot-placeholder{width:100%;height:220px;background:var(--bg3);border:1px dashed var(--sage-dim);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.75rem;position:relative;border-radius:2px;}
 .screenshot-placeholder.sm{height:200px;}
@@ -131,12 +131,12 @@ section:nth-child(even){background:var(--bg2);border-top:1px solid var(--border)
 .screenshot-caption{font-family:var(--font-mono);font-size:0.68rem;color:var(--text-dim);text-align:center;letter-spacing:0.05em;line-height:1.4;}
 
 /* SCREENSHOT IMAGES */
-.screenshot-img{width:100%;height:auto;max-height:450px;object-fit:contain;border:1px solid var(--sage-dim);border-radius:2px;display:block;background:var(--bg3);cursor:pointer;transition:opacity 0.2s;}
+.screenshot-img{width:auto;max-width:100%;height:auto;max-height:450px;border:1px solid var(--sage-dim);border-radius:2px;display:block;background:var(--bg3);cursor:pointer;transition:opacity 0.2s;}
 .screenshot-img:hover{opacity:0.8;}
-.screenshot-img-wrapper{width:100%;overflow:hidden;border:1px solid var(--sage-dim);border-radius:2px;background:var(--bg3);position:relative;display:flex;align-items:center;justify-content:center;min-height:200px;}
+.screenshot-img-wrapper{width:100%;overflow:hidden;border:1px solid var(--sage-dim);border-radius:2px;background:var(--bg3);position:relative;display:flex;align-items:center;justify-content:center;}
 
 /* REFLECTION BLOCK */
-.reflection-block{background:var(--card);border:1px solid var(--border-light);padding:2.5rem;position:relative;max-width:900px;margin-bottom:1.5rem;}
+.reflection-block{background:var(--card);border:1px solid var(--border-light);padding:2.5rem;position:relative;max-width:100%;margin-bottom:1.5rem;}
 .reflection-block::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--sage),var(--blue));}
 .reflection-block h3{font-family:var(--font-display);font-size:1rem;font-weight:700;color:var(--sage-light);margin-bottom:1rem;}
 .reflection-block .editable{max-width:100%;background:transparent;border-color:transparent;padding:0;}
@@ -146,7 +146,7 @@ section:nth-child(even){background:var(--bg2);border-top:1px solid var(--border)
 .reflection-block .editable + .editable{margin-top:0.75rem;}
 
 /* SYNTHESIS BLOCK */
-.synthesis-block{background:var(--bg3);border:1px solid var(--border-light);padding:3rem;position:relative;max-width:900px;}
+.synthesis-block{background:var(--bg3);border:1px solid var(--border-light);padding:3rem;position:relative;max-width:100%;}
 .synthesis-block::before{content:'"';position:absolute;top:1.5rem;left:2rem;font-family:var(--font-display);font-size:5rem;color:var(--sage-dim);line-height:1;opacity:0.3;pointer-events:none;}
 .synthesis-block .editable{max-width:100%;background:transparent;border-color:transparent;padding:0;}
 .synthesis-block .editable:focus{background:rgba(141,181,160,0.04);padding:0.75rem;border:1px solid var(--sage-dim);}
@@ -290,19 +290,19 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
         <div class="screenshot-img-wrapper">
           <img src="images/DBMS EER Diagram.png" alt="ER Diagram" class="screenshot-img" onclick="openImageModal(this)">
         </div>
-        <p class="screenshot-caption">ER Diagram</p>
+        <p class="screenshot-caption">ER diagram demonstrating entity relationships, normalization, and the relational design behind the FLOW database schema.</p>
       </div>
       <div class="screenshot-item">
         <div class="screenshot-img-wrapper">
           <img src="images/Flow Schema.png" alt="Relational Schema" class="screenshot-img" onclick="openImageModal(this)">
         </div>
-        <p class="screenshot-caption">Relational Schema</p>
+        <p class="screenshot-caption">Relational schema screenshot showing MySQL table structure, keys, and constraints used to enforce consistency in transactional data.</p>
       </div>
       <div class="screenshot-item">
         <div class="screenshot-img-wrapper">
           <img src="images/Flow Data Dictionary.png" alt="Data Dictionary" class="screenshot-img" onclick="openImageModal(this)">
         </div>
-        <p class="screenshot-caption">Data Dictionary / Table Structure</p>
+        <p class="screenshot-caption">Data dictionary output highlighting table fields, datatypes, and normalization decisions for the FLOW restaurant system.</p>
       </div>
     </div>
   </div>
@@ -314,19 +314,19 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
         <div class="screenshot-img-wrapper">
           <img src="images/SQL Query.png" alt="SQL Query Output" class="screenshot-img" onclick="openImageModal(this)">
         </div>
-        <p class="screenshot-caption">SQL Query Output (JOIN / Filtering)</p>
+        <p class="screenshot-caption">SQL query output demonstrating transaction retrieval, JOINs across tables, and query logic used for reporting and analytics.</p>
       </div>
       <div class="screenshot-item">
         <div class="screenshot-img-wrapper">
           <img src="images/MongoDB.png" alt="MongoDB Document Output" class="screenshot-img" onclick="openImageModal(this)">
         </div>
-        <p class="screenshot-caption">MongoDB Document Output (Reviews Example)</p>
+        <p class="screenshot-caption">MongoDB output illustrating flexible document storage, schema-less review data, and NoSQL data modeling for analytics.</p>
       </div>
       <div class="screenshot-item">
         <div class="screenshot-img-wrapper">
           <img src="images/Redis Screenshot.png" alt="Redis Key-Value Output" class="screenshot-img" onclick="openImageModal(this)">
         </div>
-        <p class="screenshot-caption">Redis Key-Value Output (Caching Example)</p>
+        <p class="screenshot-caption">Redis key-value output demonstrating caching and in-memory lookups to speed up response times in the hybrid architecture.</p>
       </div>
     </div>
   </div>
@@ -351,7 +351,7 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
       <div class="screenshot-img-wrapper">
         <img src="images/Flow Logo.png" alt="FLOW Logo" class="screenshot-img" onclick="openImageModal(this)" style="height: 190px; width: auto;">
       </div>
-      <p class="screenshot-caption">FLOW Logo</p>
+      <p class="screenshot-caption">FLOW logo representing the restaurant database system for Soul by the Sea, symbolizing streamlined operations and data flow in the hybrid architecture.</p>
     </div>
   </div>
 
@@ -395,7 +395,7 @@ CREATE TABLE person (
 );
 </code></pre>
         </div>
-        <p class="screenshot-caption">SQL Schema Screenshot</p>
+        <p class="screenshot-caption">SQL schema code demonstrating table creation with primary keys, foreign keys, and data types, illustrating relational database design principles and normalization in MySQL.</p>
       </div>
       <div class="screenshot-item">
         <div class="screenshot-img-wrapper">
@@ -414,7 +414,7 @@ CREATE TABLE person (
         return False
 </code></pre>
         </div>
-        <p class="screenshot-caption">MongoDB Event Logging</p>
+        <p class="screenshot-caption">MongoDB event logging code showing document insertion for order lifecycle events, demonstrating NoSQL flexibility and schema-less data storage for analytics and auditing.</p>
       </div>
     </div>
   </div>
@@ -429,15 +429,13 @@ CREATE TABLE person (
       <div class="screenshot-img-wrapper">
         <img src="images/System arch.png" alt="System Architecture Diagram" class="screenshot-img" onclick="openImageModal(this)">
       </div>
-      <p class="screenshot-caption">System Architecture Diagram</p>
+      <p class="screenshot-caption">System architecture diagram illustrating the hybrid database setup with MySQL for transactional data, MongoDB for flexible event logging, and Redis for caching, showcasing data flow and integration points.</p>
     </div>
     <div class="screenshot-wrap fade-up">
-      <div class="screenshot-placeholder">
-        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#89b4cc" stroke-width="1.2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-        <span>Insert Backend Code Example (Python → MongoDB/SQL)</span>
+      <div class="screenshot-img-wrapper">
+        <img src="images/backend.png" alt="Backend Code Example" class="screenshot-img" onclick="openImageModal(this)">
       </div>
-
+      <p class="screenshot-caption">Backend code example illustrating Python interaction with MongoDB/SQL and hybrid data flow between services.</p>
     </div>
   </div>
 Scalability & Performance Considerations -->
