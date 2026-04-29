@@ -252,31 +252,39 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
     <div class="artifact-card fade-up">
       <div class="artifact-card-label">Database Design & Modeling</div>
       <h4>ER Diagrams & Relational Schema</h4>
-      <div class="editable" data-key="artifact-design" data-placeholder="Click to write about your ER diagrams, schema design, normalization, and key/constraint decisions..."></div>
+      <p>Throughout a good chunk of semester my team and I focused on ER diagrams and relational schemas. For our project "FLOW", we designed diagrams and schemas that follow a restaurant management system with entities such as person, customer, employee, orders, menu_item, and inventory. These represented real word restaurant operations such as customer activity, employee roles, and order processing.</p>
+      <p>As a team, we agreed on this scenario early on, which actually made the entire design process a lot more engaging. We spent time during our meetings doing a lot of brainstorming  menu items, restaurant scenarios, restaurant & system names, and overall functionality, while gaining a deeper understanding of the system and relationships and implementing what we learned directly to our project.</p>
     </div>
 
     <div class="artifact-card fade-up">
       <div class="artifact-card-label">SQL Implementation</div>
       <h4>DDL, Queries & Index Analysis</h4>
-      <div class="editable" data-key="artifact-sql" data-placeholder="Click to write about your CREATE TABLE statements, JOINs, subqueries, GROUP BY/HAVING, and EXPLAIN output..."></div>
+      <p>This section highlights my use of SQL for defining, querying, and analyzing relational data. Through Lab 1, generating and practicing SQL problems, and the development of the FLOW system, I created tables using DDL while incorporating primary keys, foreign keys, and constraints to enforce data integrity within the database.</p>
+      <p>Additionally, I developed SQL queries to retrieve and manipulate data using commands such as SELECT, WHERE, and JOIN. These queries allowed for efficient data retrieval and made it possible to connect related tables.</p>
     </div>
 
     <div class="artifact-card fade-up">
       <div class="artifact-card-label">Advanced Database Concepts</div>
       <h4>Transactions, Concurrency & Optimization</h4>
-      <div class="editable" data-key="artifact-advanced" data-placeholder="Click to write about transaction handling, ACID compliance, index strategy, and query optimization..."></div>
+      <p>I learned about transactions and concurrency and how they affect database operations in real systems. Transactions ensure that a group of operations is either fully completed or not executed at all, helping maintain consistency and prevent partial updates.</p>
+      <p>For instance, within FLOW, placing an order may involve inserting an order record and updating related data (such as ingredient counts). If one part fails, the entire transaction should be rolled back to prevent incomplete or incorrect data.</p>
+      <p>I also explored concurrency, which allows multiple users or processes to interact with the database at the same time. For example, multiple customers placing orders across different branch locations requires the database to handle a high volume of activity without conflicts or errors. These concepts helped me understand how databases remain reliable and stable under real-world conditions.</p>
     </div>
 
     <div class="artifact-card fade-up">
       <div class="artifact-card-label">NoSQL Concepts</div>
       <h4>MongoDB Document Modeling</h4>
-      <div class="editable" data-key="artifact-nosql" data-placeholder="Click to write about document schemas, embedding vs. referencing trade-offs, and composite indexing strategy..."></div>
+      <p>Regarding NoSQL concepts such as MongoDB document modeling, I explored it as an alternative to relational database design. Unlike relational databases, MongoDB stores data in flexible, JSON-like documents rather than structured tables. this allows related data to be grouped together within a single document instead of being spread across multiple tables.</p>
+      <p>For instance, within FLOW, customer reviews could be stored as documents that include user info, ratings, and comments all in one place instead of multiple tables.</p>
+      <p>This helped me understand the trade-off between structure and flexibility, and deciphering when a NoSQL approach may be more efficient depending on the type of data being stored.</p>
     </div>
 
     <div class="artifact-card fade-up">
       <div class="artifact-card-label">Labs & Exercises</div>
       <h4>Redis, In-Memory & Hands-On Labs</h4>
-      <div class="editable" data-key="artifact-labs" data-placeholder="Click to write about your lab work, Redis commands, and exercise outcomes..."></div>
+      <p>I explored Redis as part of our NoSQL database presentation, where we examined how in-memory databases differ from traditional relational systems and when they should be used. Unlike SQL databases, Redis stores data in memory, which allows for much faster data access and retrieval.</p>
+      <p>As a team, we chose to incorporate Redis concepts into the FLOW system to better understand how NoSQL can complement relational databases. Redis is commonly used for caching and real-time data access, where speed is critical. For example, Redis can be used within the system to cache frequently accessed data such as menu items, which can then populate features like a "popular" category without repeatedly querying the database.</p>
+      <p>Overall, this helped me understand the benefits of in-memory databases, as well as the trade-offs, such as limited persistence and higher memory usage.</p>
     </div>
 
   </div>
@@ -290,19 +298,19 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
         <div class="screenshot-img-wrapper">
           <img src="images/DBMS EER Diagram.png" alt="ER Diagram" class="screenshot-img" onclick="openImageModal(this)">
         </div>
-        <p class="screenshot-caption">ER diagram demonstrating entity relationships, normalization, and the relational design behind the FLOW database schema.</p>
+        <figure><figcaption class="screenshot-caption">ER diagram demonstrating entity relationships, normalization, and the relational design behind the FLOW database schema.</figcaption></figure>
       </div>
       <div class="screenshot-item">
         <div class="screenshot-img-wrapper">
           <img src="images/Flow Schema.png" alt="Relational Schema" class="screenshot-img" onclick="openImageModal(this)">
         </div>
-        <p class="screenshot-caption">Relational schema screenshot showing MySQL table structure, keys, and constraints used to enforce consistency in transactional data.</p>
+        <figure><figcaption class="screenshot-caption">Relational schema screenshot showing MySQL table structure, keys, and constraints used to enforce consistency in transactional data.</figcaption></figure>
       </div>
       <div class="screenshot-item">
         <div class="screenshot-img-wrapper">
           <img src="images/Flow Data Dictionary.png" alt="Data Dictionary" class="screenshot-img" onclick="openImageModal(this)">
         </div>
-        <p class="screenshot-caption">Data dictionary output highlighting table fields, datatypes, and normalization decisions for the FLOW restaurant system.</p>
+        <figure><figcaption class="screenshot-caption">Data dictionary output highlighting table fields, datatypes, and normalization decisions for the FLOW restaurant system.</figcaption></figure>
       </div>
     </div>
   </div>
@@ -314,19 +322,19 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
         <div class="screenshot-img-wrapper">
           <img src="images/SQL Query.png" alt="SQL Query Output" class="screenshot-img" onclick="openImageModal(this)">
         </div>
-        <p class="screenshot-caption">SQL query output demonstrating transaction retrieval, JOINs across tables, and query logic used for reporting and analytics.</p>
+        <figure><figcaption class="screenshot-caption">SQL query output demonstrating transaction retrieval, JOINs across tables, and query logic used for reporting and analytics.</figcaption></figure>
       </div>
       <div class="screenshot-item">
         <div class="screenshot-img-wrapper">
           <img src="images/MongoDB.png" alt="MongoDB Document Output" class="screenshot-img" onclick="openImageModal(this)">
         </div>
-        <p class="screenshot-caption">MongoDB output illustrating flexible document storage, schema-less review data, and NoSQL data modeling for analytics.</p>
+        <figure><figcaption class="screenshot-caption">MongoDB output illustrating flexible document storage, schema-less review data, and NoSQL data modeling for analytics.</figcaption></figure>
       </div>
       <div class="screenshot-item">
         <div class="screenshot-img-wrapper">
           <img src="images/Redis Screenshot.png" alt="Redis Key-Value Output" class="screenshot-img" onclick="openImageModal(this)">
         </div>
-        <p class="screenshot-caption">Redis key-value output demonstrating caching and in-memory lookups to speed up response times in the hybrid architecture.</p>
+        <figure><figcaption class="screenshot-caption">Redis key-value output demonstrating caching and in-memory lookups to speed up response times in the hybrid architecture.</figcaption></figure>
       </div>
     </div>
   </div>
@@ -346,12 +354,15 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
   <div class="subsection fade-up">
     <div class="subsection-label">System Overview</div>
     <h3>What FLOW Is</h3>
-    <div class="editable" data-key="flow-overview" data-placeholder="Describe the FLOW system — its purpose, scope, entities involved, and overall architecture overview..."></div>
+    <p>FLOW is an enterprise-level restaurant management system designed to support operations across multiple branch locations. Its purpose is to centralize key business functions such as POS transactions, reservations, inventory tracking, supplier management, workforce scheduling, and customer feedback within a single platform. The name "FLOW" reflects the systems design goal of allowing data to move seamlessly across different components, supporting efficient and integrated operations.</p>
+    <p>The system is built around core entities including person, customer, employee, orders, menu_item, inventory_item, supplier, and reservation, which all model real-world restaurant operations. These entities support workflows such as order processing, staff management, inventory update, and customer interactions across different branches.</p>
+    <p>Scope: FLOW is designed to handle both operational tasks and analytics. managers can compare branch performance, monitor sales trends, and optimize staffing and menu decisions, while staff and customers interact with the system through dedicated user interfaces.</p>
+    <p>Architecture: FLOW uses a relational database (MySQL) to manage structures and transactional data, ensuring consistency. NoSQL concepts are included for the handling of more flexible data such as customer reviews and analytics-related information. This hybrid approach allows the system to balance structure, scalability, and performance in a realistic environment.</p>
     <div class="screenshot-wrap">
       <div class="screenshot-img-wrapper">
         <img src="images/Flow Logo.png" alt="FLOW Logo" class="screenshot-img" onclick="openImageModal(this)" style="height: 190px; width: auto;">
       </div>
-      <p class="screenshot-caption">FLOW logo representing the restaurant database system for Soul by the Sea, symbolizing streamlined operations and data flow in the hybrid architecture.</p>
+      <figure><figcaption class="screenshot-caption">FLOW logo representing the restaurant database system for Soul by the Sea, symbolizing streamlined operations and data flow in the hybrid architecture.</figcaption></figure>
     </div>
   </div>
 
@@ -363,15 +374,32 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
     <h3>Schema, Keys & Normalization</h3>
     <div class="content-card">
       <h4>Database Platform & Configuration</h4>
-      <div class="editable" data-key="flow-storage" data-placeholder="Describe MySQL usage for structured, transactional data, reliability and consistency, and UTF-8 compatibility..."></div>
+      <p>FLOW uses MySQL as the primary database that manages structured and transactional data. Functions such as orders, reservations, inventory management, and employee records are stored within relational tables. These require reliable data handling, especially given the multi-branch environment where multiple processes may occur simultaneously.</p>
+      <p>The relational schema is designed using primary keys, foreign keys, and constraints to enforce data integrity and maintain the correct relationships between entities. For instance:</p>
+      <ul>
+        <li>Each order must reference a customer, employee, and branch, ensuring that all transactions are tied to valid system records.</li>
+        <li>Every reservation is linked to a specific customer and branch location, preventing bookings from existing without correct context</li>
+        <li>Inventory records are connected to both menu items and suppliers, ensuring that stock levels stay consistent</li>
+        <li>Payments are associated with a specific order, therefore every financial transaction is linked to a valid purchase.</li>
+        <li>Employees are linked to a branch location, allowing for correct management of scheduling, staffing, and operational responsibilities</li>
+        <li>Order items are tied to both an order and a menu items</li>
+      </ul>
+      <p>In addition, the system supports multiple input types such as customer names, menu items, reviews, and more. This is important because system inputs ma vary, such as special characters in names or custom menu descriptions.</p>
+      <p>Overall, the database platform and config choices prioritize reliability, consistency, and structured data management, forming the foundation for the system.</p>
     </div>
     <div class="content-card">
       <h4>Normalization to 3NF</h4>
-      <div class="editable" data-key="flow-normalization" data-placeholder="Write about your normalization steps, dependency analysis, and final table structure decisions..."></div>
+      <p>The normalization process for the FLOW system was completed in stages, beginning with identifying redundancies in the initial design process. At first, there were separate entities created for different types of people such as customer, employee, supplier, manager. However, we noticed repeated attributes such as names, phone numbers, and email addresses across multiple tables. To address this, the schema was reconstructed by introducing a person super type, which just stores all shared attributes. Subtype tables such as customer, employee, and manager were then create to store role-specific information.</p>
+      <p>Further normalization steps focused on separating data into the correct tables based on functional dependencies. For example, order details were split between orders and order_items to ensure each table stores data directly related to its primary key. The same can be said with with menu and menu_items, inventory, and suppliers.</p>
+      <p>Throughout this entire process, the schema was continuously analyzed to ensure that all non key attributes depended only on their primary keys without partial dependencies. This allowed the database to meet the requirements of 3NF, improving data consistency and reducing any risk of anomalies during updates, insertions, or deletions.</p>
+      <p>The final table structure reflects these normalization decision by organizing data into tables connected through primary and foreign key relationships. This structure makes the data easier to manage, maintain, and scale while keeping it accurate and consistent.</p>
     </div>
     <div class="content-card">
       <h4>Key Constraints & ENUMs</h4>
-      <div class="editable" data-key="flow-constraints" data-placeholder="Write about your foreign key relationships, ENUM field decisions, and constraint justifications..."></div>
+      <p>The FLOW system uses primary and foreign keys to keep data connected and consistent. Foreign keys link related tables, such as orders to customers, employees, and branches, ensuring that records cannot exist without valid references. This prevents issues like invalid or incomplete data.</p>
+      <p>For instance, as previously stated, each order must reference a valid person and branch, while payments are tied to a specific order. Reservations are also linked to both a customer and a branch to maintain the correct relationships across the system.</p>
+      <p>Additionally, certain fields are restricted to specific values consistency. For instance, fields such as order status and reservation only allow predefined values such as "IN_PROGRESS", "SERVED", or "CANCELLED". Reservation times are also limited to branch hours only.</p>
+      <p>Additional constraints such as NOT NULL, UNIQUE, and CHECK conditions are used to ensure required data is present and values stay valid.</p>
     </div>
     <div class="screenshot-grid fade-up">
       <div class="screenshot-item">
@@ -424,25 +452,29 @@ CREATE TABLE person (
   <div class="subsection fade-up">
     <div class="subsection-label">Data Flow & System Integration</div>
     <h3>Hybrid Architecture</h3>
-    <div class="editable" data-key="flow-hybrid-intro" data-placeholder="Explain flow: UI → Flask/Python → databases, mention Redis caching, describe SQL for transactions and MongoDB for flexible/event data..."></div>
+    <p>FLOW uses a hybrid architecture that combines MySQL, Redis, and MongoDB to handle different types of data. MySQl us used fr structured, transactional data such as orders, reservations, inventory, employee records where consistency is a key factor. Redis is used as a caching layer to improve performance for frequently accessed data such as populating the "popular" category on the website based off the most ordered items. MongoDB is used for flexible data such as feedback and reviews/analytics.</p>
+    <p>Data in the system follows a flow from user interface to the database layer. When a user performs an action, such as placing an order, the request is first handled by the Python application layer. The application validates the input and determines how the data should be processed. Before querying, Redis may be checked for cached data to reduce unnecessary database calls and improve response times.</p>
+    <p>If data is not cached, the system interacts with MySQL to handle it. For example, placing an order involves inserting records into the orders table and updating related inventory data. his ensures accuracy and consistency.</p>
+    <p>After the transaction is processed, relevant event or tracking data can be sent to MongoDB where it is stored in a more flexible format for use in analytics, logging, or real-time updates. This allows the system to handle both structured and unstructured data.</p>
+    <p>Overall, this hybrid approach allows FLOW to maintain strong data integrity for core operations while also supporting flexibility and performance, making it suitable for a real-world, multi-branch system.</p>
     <div class="screenshot-wrap fade-up">
       <div class="screenshot-img-wrapper">
         <img src="images/System arch.png" alt="System Architecture Diagram" class="screenshot-img" onclick="openImageModal(this)">
       </div>
-      <p class="screenshot-caption">System architecture diagram illustrating the hybrid database setup with MySQL for transactional data, MongoDB for flexible event logging, and Redis for caching, showcasing data flow and integration points.</p>
+      <figure><figcaption class="screenshot-caption">System architecture diagram illustrating the hybrid database setup with MySQL for transactional data, MongoDB for flexible event logging, and Redis for caching, showcasing data flow and integration points.</figcaption></figure>
     </div>
     <div class="screenshot-wrap fade-up">
       <div class="screenshot-img-wrapper">
         <img src="images/backend.png" alt="Backend Code Example" class="screenshot-img" onclick="openImageModal(this)">
       </div>
-      <p class="screenshot-caption">Backend code example illustrating Python interaction with MongoDB/SQL and hybrid data flow between services.</p>
+      <figure><figcaption class="screenshot-caption">Backend code example illustrating Python interaction with MongoDB/SQL and hybrid data flow between services.</figcaption></figure>
     </div>
   </div>
 Scalability & Performance Considerations -->
   <div class="subsection fade-up">
     <div class="subsection-label">Scalability & Performance Considerations</div>
     <h3>Redis Caching & Optimization</h3>
-    <div class="editable" data-key="flow-testing" data-placeholder="Describe Redis caching, indexing and query efficiency, future scalability (sharding, replicas)..."></div>
+    <p>Redis is used in the FLOW system as a caching layer to improve performance and reduce unnecessary database queries. Before sending requests to the main database, the system first checks Redis for frequently accessed data such as menu items or dashboard information. If the data is found in cache, it is returned immediately, which speeds up response time. If not, the system queries MySQL and stores the result in Redis for future use. This reduces repeated database calls and helps the system handle higher traffic more efficiently.</p>
   </div>
 
   <div class="divider"></div>
@@ -453,15 +485,20 @@ Scalability & Performance Considerations -->
     <h3>What Was Hard & What I'd Do Differently</h3>
     <div class="content-card">
       <h4>Team & Workflow Challenges</h4>
-      <div class="editable" data-key="flow-team" data-placeholder="Describe collaboration challenges, unequal contributions, and how you maintained quality and on-time delivery..."></div>
+      <p>Throughout the semester, several challenges impacted the overall workflow. Collaboration was one of a few difficulties, as coordinating tasks across the group required consistent communication, leadership, clear expectation, and alignment on decisions (which went smoothly for the most part). However as the semester went on that structure slowly fell apart, as we weren't able to have the consistent meetings we set up or have the entire group there. Differences in availability and working styles sometimes made it harder to stay synched up. Time management was also a challenge, especially balancing this course alongside 405. Wile managing both at the same time was...a lot...it also reinforced overlapping concepts and strengthened my overall understanding of database systems in both classes.</p>
+      <p>At times, unequal contribution within the team required me to take on additional work to keep up on track and submitted on time. This also involved cross-referencing report content, code, and rubric/scenario requirements to ensure everything aligned with the deliverables. While this added extra responsibility, it was needed, and it helped ensure that the final work remained complete, consistent, and accurate.</p>
+      <p>Despite these challenges, the team maintained quality and met deadlines by holding regular meetings, clearly dividing work, and reviewing each others work. Overall, these experiences  highlighted the importance of communication, accountability, and structure when working on a large scale system especially with a relatively large team.</p>
+      <p>If I were to approach this project again, I would spend more time doing additional research outside of the course material to deepen my understanding of certain concepts earlier on. While the course was well-paced and each milestone aligned clearly with what was being taught, taking the initiative to explore topics further ahead of time could have made some design decisions more efficient.</p>
     </div>
     <div class="content-card">
       <h4>Cross-Platform Environment Setup</h4>
-      <div class="editable" data-key="flow-env" data-placeholder="Describe the environment variable-based credential setup and cross-platform Mac/Windows development challenges..."></div>
+      <p>FLOW was designed for cross-platform use. The main interfaces were built using python, tkinter, and html (js and css).</p>
+      <p>This shows that the backend can support multiple interfaces, making the system more flexible and suited for scalability.</p>
     </div>
     <div class="content-card">
       <h4>Architecture Trade-Offs</h4>
-      <div class="editable" data-key="flow-tradeoffs" data-placeholder="Describe Tkinter vs SwiftUI vs Flask decisions, scope changes, and trade-offs made under real constraints..."></div>
+      <p>The hybrid architecture we used did come with a few trade-offs. While using MySQL, Mongo, and Redis improve flexibility and performance, it also adds complexity to the system. Managing multiple databases requires more coordination and auditing to ensure consistency.</p>
+      <p>However, overall, the designed system still balances consistency, flexibility, and performance depending on the type of data being handled.</p>
     </div>
   </div>
 
@@ -477,25 +514,31 @@ Scalability & Performance Considerations -->
 
   <div class="reflection-block fade-up">
     <h3>Learning Growth</h3>
-    <div class="editable" data-key="reflect-growth-1" data-placeholder="Reflect on how your understanding of database systems evolved over the semester — what clicked, what surprised you, and what you understand now that you didn't before..."></div>
-    <div class="editable" data-key="reflect-growth-2" data-placeholder="Continue here — specific moments, assignments, or concepts that shifted your thinking..."></div>
+    <p>Throughout this course, my understanding of database systems evolved exponentially. At the beginning, i honestly had no clue what to expect in this class., and mainly saw databases as something that stores and retrieves data without ever fully thinking about the how. Over time, that perspective shifted as i began to understand how database systems are designed to support real world operations, enforce data integrity, and handle complex relationships between different components. Concepts such as normalization, foreign key relationships, and hybrid architectures started to click as I applied them directly when designing FLOW.</p>
+    <p>One of the biggest shits in my understanding came from working through the project milestones. Seeing how each stage built on the previous one, from conceptual design, to schema development, to system integration, helped me understand how database systems are actually developed. The introduction of NoSQL and hybrid arch was surprising  in its own way, it showed that a single database solution isn't always enough. Instead, different technologies are combined to meet specific system needs.</p>
+    <p>Most importantly, this project allowed me to grow creatively. While there were clear requirements and structure, there was still flexibility and ownership in how the system was designed and implemented. From naming, to figuring out the theme, creating imaginary food for our menus, to having full range to showcase our work, we had the opportunity to shape the project in a way that felt original. I personally appreciated the creative freedom as it made it more engaging and allowed me to fully showcase my ideas while still meeting the technical requirements.</p>
+    <p>One thing that stood out during the design process was how a single decision could open the door to multiple new questions that needed to be analyzed. For example, when designing how menu items and inventory interact, it was not just about storing menu data. It required thinking through how each menu item is linked to multiple ingredients, how those ingredients are tracked in inventory, and how stock should be updated when an order is placed. If one ingredient runs out, the entire menu item may no longer be available. Just to actually show real functionality. This also led to additional considerations, such as handling specific customer requests or modifications, and ensuring that all related data updates remain consistent across the system. The team practically had to think about a multitude of scenarios just from one feature.</p>
+    <p>Working with python further strengthened my love for the language and understanding of how different concepts from other courses come together in a real system. Implementing scripts that handled database interactions made connections between topics such as data structures, algorithms, and system design. It was no longer just about writing code, everything had to work together, it forced me to think critically, process problems step by step, and develop solutions, reinforcing the problem solving and analytical skills required in this field. The integration of concepts helped solidify my understanding.</p>
+    <p>More than anything, this experience forced me to continuously learn and adapt. It showed me what it actually means to think and design like a professional, breaking down problems making design decisions, and building. systems that go beyond just writing code. I know find myself looking at systems differently, being able to break down how their internal components probably work together and how data flows through them. This class made me see the world differently, especially in how tech connects systems and people together effortlessly.</p>
+    <p>I genuinely enjoyed this course, even with its reputation. While it was challenging, it pushed me to think my deeply and get out my comfort zone.</p>
   </div>
 
   <div class="reflection-block fade-up">
     <h3>SQL vs. NoSQL vs. NewSQL/Graph</h3>
-    <div class="editable" data-key="reflect-compare-1" data-placeholder="Compare the three paradigms — when each fits, what CAP theorem reasoning applies, and how you would now choose between them for a real project..."></div>
-    <div class="editable" data-key="reflect-compare-2" data-placeholder="Reference specific decisions from FLOW and how they exemplify these trade-offs..."></div>
+    <p>In FLOW, MySQL stores core transactional data such as orders, inventory, reservations, and employee records. MongoDB stores flexible data like customer feedback and Redis is used to cache frequently accessed data such as menu items.</p>
+    <p>These choices reflect trade-offs in system design. MySQL is used where consistency matters the most, MongoDB where flexibility is needed, and Redis where speed is a priority. Based on this, I would choose between these systems in a real project by matching the database to the type of data.</p>
   </div>
 
   <div class="reflection-block fade-up">
     <h3>Design Trade-Offs</h3>
-    <div class="editable" data-key="reflect-design" data-placeholder="Reflect on the architectural decisions you made — normalization choices, embedding vs. referencing in MongoDB, indexing strategy, and what you'd change in hindsight..."></div>
+    <p>One major architecture decision was switching the Customer UI from Tkinter to a website. Since customers would realistically expect a web-based interface, using Flask for the customer size made the system easier to access, easier to demonstrate, and more engaging for the class. However, this also created a trade-off because the project now has both a web interface and python desktop interface to manage.</p>
+    <p>Another trade-off was balancing normalization with usability. Normalizing the schema helped reduce duplicate data, especially with the person supertype and customer/employee subtypes, but it also made some queries more complex because related data and to be joined across multiple tables. For MongoDB, flexible data such as reviews and even logs worked better as documents, while core relationships stayed in MySQL. In hindsight, i would probably spend more time planning indexes and data access patterns earlier, especially for branch based reports, menu searches, and frequently accessed data that could benefit from Redis caching.</p>
   </div>
 
   <div class="reflection-block fade-up">
     <h3>Real-World Applications</h3>
-    <div class="editable" data-key="reflect-realworld-1" data-placeholder="Connect course concepts to your Protiviti Oracle ERP internship — what overlaps, what was different, and how DBMS concepts apply to enterprise systems..."></div>
-    <div class="editable" data-key="reflect-realworld-2" data-placeholder="Connect to your cybersecurity career path — how database knowledge informs security, audit trails, and data integrity in secure systems..."></div>
+    <p>Concepts from this course directly connect to my experience during my internship, where I worked on a project involving the transformation of a business system to Oracle. In that role, I worked with enterprise systems where large-scale databases support critical business operations. I saw the importance of structured data, data integrity, and consistency, especially in financial systems where accuracy is essential. This aligns with how MySQL was used in FLOW to manage data.</p>
+    <p>As an EAS Intern on campus, i saw how a single IT department manages and maintains systems that support multiple areas on campus, from Hamptonu experience, to student services, to internal operations. It showed me how interconnected systems rely on databases to function properly behind the scenes. This experience helped me understand, data flow, and system integration, applying real enterprise environments where many components depend on each other.</p>
   </div>
 
 </section>
@@ -509,10 +552,12 @@ Scalability & Performance Considerations -->
   </div>
 
   <div class="synthesis-block fade-up">
-    <div class="editable" data-key="synthesis-1" data-placeholder="Begin synthesis here — tie together everything from the semester into one cohesive narrative. What is the through-line of your learning?"></div>
-    <div class="editable" data-key="synthesis-2" data-placeholder="Continue — how did this course change the way you approach system design? What decisions feel automatic now that felt abstract before?"></div>
-    <div class="editable" data-key="synthesis-3" data-placeholder="Continue — speak to broader implications. What does it mean to design systems that are not just functional but principled?"></div>
-    <div class="editable" data-key="synthesis-4" data-placeholder="Final section — what comes next? How will you apply this knowledge going forward?"></div>
+    <p>Throughout this course my understanding of database system shifted from simply storing and retrieving data to designing systems that support real-world operations. What tied everything together for me was realizing that every concept plays a role in how data flows through a system, working on FLOW helped connect everything into one cohesive experience, where each decision impacted how the system functioned as a whole.</p>
+    <p>This course changed how i approach system design. Something that I had basic experience to prior, such as normalization, foreign keys, or data modeling, now feels more digestible. I now naturally think about how data is/ should be structured, how entities relate, and how changes in one part of the system affect another. For example, when designing HQ functionality, we needed to display compared performance across multiple branches. This required thinking beyond just storing the data, we had to decide what data should be tracked, such as sales, orders, etc, and how it could be aggregated and compared across locations. We also had to simulate how data would be generated from three different branches, ensuring that each branch had its own data while still being part of the same system.</p>
+    <p>This course changed how i think about building systems beyond just making them work. It showed me that good system design is about making decisions that are reliable, scalable, and intentional. Every choice affects the overall performance and usability of the system</p>
+    <p>Designing FLOW made it clear that systems need to be built with purpose, not just functionality. it is not just about storing data, but about structuring it in a way that supports real use cases, whether its handling transactions, tracking performance, or supporting multiple users across locations. This perspective helped me understand the importance of designing systems that are both practical and organized.</p>
+    <p>Moving forward, I plan to apply what i learned in this course in both my personal and professional experiences. This includes building systems that involve database design, improving how i structure and managing data, and continuing to explore how different technologies work together within a system.</p>
+    <p>IT also connects directly to my career interests, especially in areas such as enterprise systems, networking, and other where understanding how data is stored, accessed, and sent is important.</p>
   </div>
 
 </section>
@@ -559,23 +604,16 @@ document.querySelectorAll('.editable[data-key]').forEach(el => {
 
 // ── Edit mode toggle
 let editMode = false;
+let attempts = 0;
 function toggleEdit() {
-  editMode = !editMode;
-  const btn = document.getElementById('editToggle');
-  const dot = document.getElementById('editDot');
-  const banner = document.getElementById('edit-banner');
-  const editables = document.querySelectorAll('.editable');
-
   if (editMode) {
-    btn.classList.add('active');
-    btn.innerHTML = '<span class="edit-dot" id="editDot"></span> Editing';
-    dot.style.display = 'inline-block';
-    banner.classList.add('show');
-    editables.forEach(el => {
-      el.contentEditable = 'true';
-      el.classList.add('edit-mode-on');
-    });
-  } else {
+    // Exit edit mode
+    editMode = false;
+    const btn = document.getElementById('editToggle');
+    const dot = document.getElementById('editDot');
+    const banner = document.getElementById('edit-banner');
+    const editables = document.querySelectorAll('.editable');
+
     btn.classList.remove('active');
     btn.innerHTML = '<span class="edit-dot" id="editDot" style="display:none"></span> Edit';
     banner.classList.remove('show');
@@ -586,6 +624,34 @@ function toggleEdit() {
       localStorage.setItem(PREFIX + el.dataset.key, el.innerHTML);
     });
     showToast();
+  } else {
+    // Enter edit mode - prompt for password
+    const password = prompt("Enter password to edit:");
+    if (password === "7253") {
+      editMode = true;
+      attempts = 0;
+      const btn = document.getElementById('editToggle');
+      const dot = document.getElementById('editDot');
+      const banner = document.getElementById('edit-banner');
+      const editables = document.querySelectorAll('.editable');
+
+      btn.classList.add('active');
+      btn.innerHTML = '<span class="edit-dot" id="editDot"></span> Editing';
+      dot.style.display = 'inline-block';
+      banner.classList.add('show');
+      editables.forEach(el => {
+        el.contentEditable = 'true';
+        el.classList.add('edit-mode-on');
+      });
+    } else {
+      attempts++;
+      if (attempts >= 3) {
+        alert("Wrong password. Hint: It's a 4-digit number.");
+        attempts = 0; // Reset attempts after hint
+      } else {
+        alert("Wrong password. Try again.");
+      }
+    }
   }
 }
 
