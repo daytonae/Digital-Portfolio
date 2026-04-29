@@ -348,11 +348,10 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
     <h3>What FLOW Is</h3>
     <div class="editable" data-key="flow-overview" data-placeholder="Describe the FLOW system — its purpose, scope, entities involved, and overall architecture overview..."></div>
     <div class="screenshot-wrap">
-      <div class="screenshot-placeholder lg">
-        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#8db5a0" stroke-width="1.2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
-        <span>Insert System Architecture / Overview Diagram</span>
+      <div class="screenshot-img-wrapper">
+        <img src="images/System arch.png" alt="System Architecture Diagram" class="screenshot-img" onclick="openImageModal(this)" style="height: 190px; width: auto;">
       </div>
+      <p class="screenshot-caption">System Architecture Diagram</p>
     </div>
   </div>
 
@@ -363,8 +362,8 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
     <div class="subsection-label">Database Design Decisions</div>
     <h3>Schema, Keys & Normalization</h3>
     <div class="content-card">
-      <h4>Storage Engine & Character Set</h4>
-      <div class="editable" data-key="flow-storage" data-placeholder="Write about your InnoDB selection rationale, UTF-8 charset decision, and partitioning strategy..."></div>
+      <h4>Database Platform & Configuration</h4>
+      <div class="editable" data-key="flow-storage" data-placeholder="Describe MySQL usage for structured, transactional data, reliability and consistency, and UTF-8 compatibility..."></div>
     </div>
     <div class="content-card">
       <h4>Normalization to 3NF</h4>
@@ -375,60 +374,83 @@ footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;justify
       <div class="editable" data-key="flow-constraints" data-placeholder="Write about your foreign key relationships, ENUM field decisions, and constraint justifications..."></div>
     </div>
     <div class="screenshot-grid fade-up">
-      <div class="screenshot-placeholder">
-        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8db5a0" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
-        <span>Insert Schema Screenshot</span>
+      <div class="screenshot-item">
+        <div class="screenshot-img-wrapper">
+          <pre><code>CREATE TABLE branch (
+  branch_id INT AUTO_INCREMENT PRIMARY KEY,
+  branch_name VARCHAR(50) NOT NULL UNIQUE,
+  address VARCHAR(100),
+  phone VARCHAR(15),
+  manager_id INT NULL
+);
+
+CREATE TABLE person (
+  person_id INT AUTO_INCREMENT PRIMARY KEY,
+  first_name VARCHAR(50) NOT NULL,
+  last_name VARCHAR(50) NOT NULL,
+  dob DATE,
+  phone VARCHAR(15),
+  address VARCHAR(100),
+  email VARCHAR(60) UNIQUE
+);
+</code></pre>
+        </div>
+        <p class="screenshot-caption">SQL Schema Screenshot</p>
       </div>
-      <div class="screenshot-placeholder">
-        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8db5a0" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
-        <span>Insert DDL / CREATE TABLE Screenshot</span>
+      <div class="screenshot-item">
+        <div class="screenshot-img-wrapper">
+          <pre><code>def log_order_event(order_id, branch_id, event_type, data=None):
+    """Appends an order lifecycle event to the order_events collection."""
+    try:
+        get_mongo_db().order_events.insert_one({
+            "order_id": order_id,
+            "branch_id": branch_id,
+            "event_type": event_type,
+            "data": data or {},
+            "timestamp": datetime.utcnow()
+        })
+        return True
+    except Exception:
+        return False
+</code></pre>
+        </div>
+        <p class="screenshot-caption">MongoDB Event Logging</p>
       </div>
     </div>
   </div>
-
   <div class="divider"></div>
 
-  <!-- SQL + NoSQL Integration -->
+  <!-- Data Flow & System Integration -->
   <div class="subsection fade-up">
-    <div class="subsection-label">SQL + NoSQL Integration</div>
+    <div class="subsection-label">Data Flow & System Integration</div>
     <h3>Hybrid Architecture</h3>
-    <div class="editable" data-key="flow-hybrid-intro" data-placeholder="Describe how MySQL and MongoDB were used together — what data lives in each, how they interact, and the reasoning behind the split..."></div>
-    <div class="content-card" style="margin-top:1.5rem;">
-      <h4>MySQL — Transactional Data</h4>
-      <div class="editable" data-key="flow-mysql" data-placeholder="Write about what relational data was stored in MySQL and why (ACID, structured queries, CP consistency)..."></div>
-    </div>
-    <div class="content-card">
-      <h4>MongoDB — Flexible Content & Analytics</h4>
-      <div class="editable" data-key="flow-mongo" data-placeholder="Write about the MongoDB document model, embedded OrderItems, and eventual consistency trade-off..."></div>
+    <div class="editable" data-key="flow-hybrid-intro" data-placeholder="Explain flow: UI → Flask/Python → databases, mention Redis caching, describe SQL for transactions and MongoDB for flexible/event data..."></div>
+    <div class="screenshot-wrap fade-up">
+      <div class="screenshot-placeholder">
+        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#89b4cc" stroke-width="1.2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        <span>Insert System Architecture Diagram</span>
+      </div>
     </div>
     <div class="screenshot-wrap fade-up">
       <div class="screenshot-placeholder">
         <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#89b4cc" stroke-width="1.2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-        <span>Insert Integration / Hybrid Architecture Diagram</span>
+        <span>Insert Backend Code Example (Python → MongoDB/SQL)</span>
       </div>
+
     </div>
   </div>
-
-  <div class="divider"></div>
-
-  <!-- Testing & Validation -->
+Scalability & Performance Considerations -->
   <div class="subsection fade-up">
-    <div class="subsection-label">Testing & Validation</div>
-    <h3>Query Testing & Data Integrity</h3>
-    <div class="editable" data-key="flow-testing" data-placeholder="Describe how queries were tested, how data integrity was verified, and what validation methods were used..."></div>
-    <div class="screenshot-grid fade-up" style="margin-top:1.5rem;">
-      <div class="screenshot-placeholder sm">
+    <div class="subsection-label">Scalability & Performance Considerations</div>
+    <h3>Redis Caching & Optimization</h3>
+    <div class="editable" data-key="flow-testing" data-placeholder="Describe Redis caching, indexing and query efficiency, future scalability (sharding, replicas)..."></div>
+    <div class="screenshot-wrap fade-up">
+      <div class="screenshot-placeholder">
         <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#89b4cc" stroke-width="1.2"><polyline points="20 6 9 17 4 12"/></svg>
-        <span>Insert Test Query Output</span>
-      </div>
-      <div class="screenshot-placeholder sm">
-        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#89b4cc" stroke-width="1.2"><polyline points="20 6 9 17 4 12"/></svg>
-        <span>Insert EXPLAIN / Validation Output</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#89b4cc" stroke-width="1.2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        <span>Insert Performance Optimization Screenshot (Redis or Indexing)</span>
       </div>
     </div>
   </div>
